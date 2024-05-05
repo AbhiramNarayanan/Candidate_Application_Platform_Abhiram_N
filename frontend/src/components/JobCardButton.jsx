@@ -1,17 +1,18 @@
 import React,{useState} from 'react';
 
-const JobCardButton = ({ onClick, url, label, bgColor, color, fontWeight }) => {
+const JobCardButton = ({ onClick, url, label, bgColor, color, fontWeight, icon}) => {
     const [hovering, setHovering] = React.useState(false);
 
 
   const buttonStyle = {
     backgroundColor: bgColor,
     color: color,
-    padding: '10px 20px',
+    padding: '0.7rem 0.5rem',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '0.5rem',
     cursor: 'pointer',
-    width: "14rem",
+    width: "100%",
+    maxWidth: "18rem",
     margin: ".3rem auto",
     transition: 'all 0.3s ease',
     fontWeight : fontWeight
@@ -20,10 +21,11 @@ const JobCardButton = ({ onClick, url, label, bgColor, color, fontWeight }) => {
   };
 
   const hoverStyle = {
-    boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0rem 0rem 1.875rem 0.625rem rgba(0, 0, 0, 0.2)', // Adjusted boxShadow
     backgroundColor: '#5a6268',
     color: '#fff',
   };
+  
 
   const handleClick = () => {
     if (url) {
@@ -43,7 +45,7 @@ const JobCardButton = ({ onClick, url, label, bgColor, color, fontWeight }) => {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      {label}
+      {icon}{label}
     </button>
   );
 };

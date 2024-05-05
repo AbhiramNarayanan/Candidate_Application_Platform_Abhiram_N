@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@mui/material';
-import JobSingleCard from "../JobSingleCard"
+import JobSingleCard from "../jobSingleCard/JobSingleCard"
 import './JobCard.css';
 
 const JobCard = ({jobs}) => {

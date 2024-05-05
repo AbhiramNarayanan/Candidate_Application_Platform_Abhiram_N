@@ -1,0 +1,12 @@
+.singleCardContainer {
+    border: 2px solid #e6e6e6;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    position: relative;
+  }
+  
+  .singleCardContainer:hover {
+    box-shadow: 0 1.25rem 1.875rem -0.625rem rgba(0, 0, 0, 0.25), 0 0.625rem 0.625rem -0.3125rem rgba(0, 0, 0, 0.1);
+  }
+  
