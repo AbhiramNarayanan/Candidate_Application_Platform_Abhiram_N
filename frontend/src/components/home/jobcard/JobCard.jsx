@@ -5,13 +5,13 @@ import './JobCard.css';
 
 const JobCard = ({jobs}) => {
   return (
-    <Grid container className="JobsCardGrid">
+    <div className="JobsCardGrid">
     {jobs.map((item) => (
       <Grid item key={item.jdUid} xs={12} sm={6} md={4} lg={3}>
         <JobSingleCard job={item} />
       </Grid>
     ))}
-  </Grid>
+  </div>
   )
 }
 
