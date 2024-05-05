@@ -54,7 +54,7 @@ const Home = ({ url, limit= 5, offset= 0 }) => {
   
 
   return (
-    <div style={{width:"1rem"}}>
+    <div style={{padding:"1rem"}}>
     {loading ? (
         <Spinner />
       ) : 
