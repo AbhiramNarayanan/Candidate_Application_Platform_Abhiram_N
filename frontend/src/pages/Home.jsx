@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
+import JobCard from "../components/home/jobcard/JobCard.jsx"
+
 
 const Home = ({ url, limit= 5, offset= 0 }) => {
   const [jobs, setJobs] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
   async function fetchJobs(getUrl) {
@@ -52,9 +54,22 @@ const Home = ({ url, limit= 5, offset= 0 }) => {
   
 
   return (
-    <div>
-      <h1>Home</h1>
-      <Spinner />
+    <div style={{width:"1rem"}}>
+    {loading ? (
+        <Spinner />
+      ) : 
+
+      (
+        jobs && jobs.length > 0 ?(
+        <JobCard jobs ={jobs}/>
+        ):
+        (
+          <div>No data found</div>
+        )
+      
+      )
+      }
+      
     </div>
   );
 };
