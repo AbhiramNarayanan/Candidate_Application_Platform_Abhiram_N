@@ -1,33 +1,62 @@
 import React, { useEffect, useState } from "react";
-import Spinner from "../components/Spinner"
+import Spinner from "../components/Spinner";
 
-const Home = () => {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
+const Home = ({ url, limit= 5, offset= 0 }) => {
+  const [jobs, setJobs] = useState([]);
+  const [Loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-  const body = JSON.stringify({
-    limit: 10,
-    offset: 0,
-  });
+  async function fetchJobs(getUrl) {
+    try {
+      setLoading(true);
 
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body,
-  };
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const body = JSON.stringify({
+        limit: `${limit}`,
+        offset: `${offset}`,
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body,
+      };
+      const response = await fetch(`${getUrl}`, requestOptions);
+      const data = await response.json();
+      console.log(data)
+
+      if(data && data.jdList && data.jdList.length >0){
+        setJobs(data.jdList)
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMsg(error.message);
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
-    fetch(
-      "https://api.weekday.technology/adhoc/getSampleJdJSON",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
-  }, []);
-  return <div>
-  <h1>Home</h1>
-  <Spinner/>
-  </div>;
+    if (url !== "") {
+      fetchJobs(url);
+    }
+  }, [url]);
+
+  if (errorMsg !== null) {
+    <div>Error:{errorMsg}</div>;
+  }
+
+  console.log(jobs)
+  
+
+  return (
+    <div>
+      <h1>Home</h1>
+      <Spinner />
+    </div>
+  );
 };
 
 export default Home;
