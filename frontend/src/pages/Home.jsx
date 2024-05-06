@@ -6,6 +6,7 @@ import JobCard from "../components/home/jobcard/JobCard.jsx";
 const Home = ({ url, limit = 5 }) => {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [reachedEnd, setReachedEnd] = useState(false); //state to track if the end is reached
@@ -41,10 +42,10 @@ const Home = ({ url, limit = 5 }) => {
   }
 
   useEffect(() => {
-    if (url !== "") {
+    if (url !== "" && selectedRole === "") {
       fetchJobs(url);
     }
-  }, [url]);
+  }, [url, selectedRole]);
 
   function handleScrollPercentage() {
     const scrolledToBottom =
@@ -74,8 +75,11 @@ const Home = ({ url, limit = 5 }) => {
         .toString()
         .toLowerCase()
         .includes(search.toString().toLowerCase())
-    );
+    ) && (selectedRole === "" || job.jobRole === selectedRole); 
   });
+
+  // Get all unique roles in ascending order
+  const roles = [...new Set(jobs.map((job) => job.jobRole))].sort();
   
 
 
@@ -88,13 +92,23 @@ const Home = ({ url, limit = 5 }) => {
 
   return (
     <div style={{ padding: "1rem" }}>
-    <div>
+    <div style={{marginLeft:"1rem"}}>
+
+    <select value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)} style={{width:"10rem", height:"2.8rem", borderRadius:"0.5rem", border:"2px solid #d9d9d9", paddingLeft:"1rem", color:"gray"}}>
+          <option value="">Roles</option>
+          {roles.map((role) => (
+            <option key={role} value={role}>
+              {role}
+            </option>
+          ))}
+        </select>
+
     <input
             className="company-input"
             placeholder="Search Company Name, Job Role or Location"
             onChange={(e) => setSearch(e.target.value)}
             value={search}
-            style={{width:"18rem", height:"2.5rem", borderRadius:"0.5rem", border:"2px solid #d9d9d9", paddingLeft:"1rem"}}
+            style={{width:"18rem", height:"2.5rem", borderRadius:"0.5rem", border:"2px solid #d9d9d9", paddingLeft:"1rem", color:"gray", marginLeft:"0.8rem"}}
           />
           </div>
        
