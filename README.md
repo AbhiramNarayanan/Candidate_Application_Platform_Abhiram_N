@@ -35,9 +35,13 @@ Deployed Link: https://weekday-applicant-portal-abhiram-n.netlify.app/
 
 ## Project Images
 
-1. Job Cards and Whole Frontend Image
-2. Infinite Scroll
-3. Filter
-4. Responsiveness
-5. Job Card
+1. Job Cards and Whole Frontend Image: https://drive.google.com/file/d/1PhAcal-8vNN9zJkVf9WUzhstNVeKm43H/view?usp=sharing
+
+2. Infinite Scroll: https://drive.google.com/file/d/14mzCVqjcAfZE-t6WIfVwXteSL5wYuA10/view?usp=sharing
+
+3. Filter: https://drive.google.com/file/d/1RkiXMZixnaFFqOAsjLstd0plXUhQGYDI/view?usp=sharing
+
+4. Responsiveness: https://drive.google.com/file/d/1nU13wtvwnXGQNJBLLC22W5kHh3brwQ2S/view?usp=sharing
+
+5. Job Card Modal: https://drive.google.com/file/d/17fahOvKyzQUcLCM7EpnvNA0w1epIg8aa/view?usp=sharing
 
