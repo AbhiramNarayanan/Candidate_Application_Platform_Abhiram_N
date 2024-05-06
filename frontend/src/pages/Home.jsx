@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import JobCard from "../components/home/jobcard/JobCard.jsx";
 
+
 const Home = ({ url, limit = 5 }) => {
   const [jobs, setJobs] = useState([]);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [reachedEnd, setReachedEnd] = useState(false); //state to track if the end is reached
@@ -63,6 +65,21 @@ const Home = ({ url, limit = 5 }) => {
     };
   }, [loading, reachedEnd]);
 
+
+
+  const searchJobs = jobs.filter((job) => {
+    return Object.keys(job).some((key) =>
+      job[key] &&
+      job[key]
+        .toString()
+        .toLowerCase()
+        .includes(search.toString().toLowerCase())
+    );
+  });
+  
+
+
+
   if (errorMsg !== null) {
     <div>Error:{errorMsg}</div>;
   }
@@ -71,11 +88,22 @@ const Home = ({ url, limit = 5 }) => {
 
   return (
     <div style={{ padding: "1rem" }}>
+    <div>
+    <input
+            className="company-input"
+            placeholder="Search Company Name, Job Role or Location"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            style={{width:"18rem", height:"2.5rem", borderRadius:"0.5rem", border:"2px solid #d9d9d9", paddingLeft:"1rem"}}
+          />
+          </div>
+       
+
       {loading ? (
         <Spinner />
       ) : jobs && jobs.length > 0 ? (
         <>
-          <JobCard jobs={jobs} />
+          <JobCard jobs={searchJobs} />
           {reachedEnd && <div>You have reached the end</div>}
         </>
       ) : (
